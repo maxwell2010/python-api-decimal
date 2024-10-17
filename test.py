@@ -10,11 +10,11 @@ async def main():
     contract_address = "0x4E8118E97586A60e5d71e45811E512546bCD52Ce"
 
     address_info = await api.address_info(address)
-    validator_list = await api.validator_list()
+    validator_select = await api.validator_select()
     contracts_verification = await api.contracts_verification(contract_address)
 
     print("Address Info:", address_info)
-    print("Validator List:", validator_list)
+    print("Validator List:", validator_select)
     print("contracts_verification:", contracts_verification)
 
 
