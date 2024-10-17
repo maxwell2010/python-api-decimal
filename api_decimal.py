@@ -1,4 +1,7 @@
 import aiohttp
+import logging
+
+logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
 
 
 class DecimalChainAPI:
@@ -11,17 +14,26 @@ class DecimalChainAPI:
     async def get_data(self, endpoint):
         url = f"{self.BASE_URL}/{endpoint}?limit={self.limit}&offset={self.offset}"
         async with aiohttp.ClientSession() as session:
-            async with session.get(url) as response:
-                if response.status == 200:
-                    data = await response.json()
-                    ok = data.get("ok", data.get("Ok", False))
-                    result = data.get("result", data.get("Result", None))
-                    if ok and result is not None:
-                        return result
+            try:
+                async with session.get(url) as response:
+                    if response.status == 200:
+                        data = await response.json()
+                        ok = data.get("ok", data.get("Ok", False))
+                        result = data.get("result", data.get("Result", None))
+                        if ok and result is not None:
+                            return result
+                        else:
+                            logging.error(f"Unexpected response structure: ok={ok}, result={result}")
+                            return None
                     else:
+                        logging.error(f"Request failed with status: {response.status}")
                         return None
-                else:
-                    return None
+            except aiohttp.ClientError as e:
+                logging.error(f"Client error occurred: {e}")
+                return None
+            except Exception as e:
+                logging.error(f"An unexpected error occurred: {e}")
+                return None
 
     async def post_data(self, endpoint, payload=None):
         url = f"{self.BASE_URL}/{endpoint}"
@@ -32,14 +44,19 @@ class DecimalChainAPI:
                         data = await response.json()
                         ok = data.get("ok", data.get("Ok", False))
                         result = data.get("result", data.get("Result", None))
-                        if ok and result is not None:
+                        if ok and result is not None: 
                             return result
                         else:
+                            logging.error(f"Unexpected response structure: ok={ok}, result={result}")
                             return None
                     else:
+                        logging.error(f"Request failed with status: {response.status}")
                         return None
+            except aiohttp.ClientError as e:
+                logging.error(f"Client error occurred: {e}")
+                return None
             except Exception as e:
-                print(f"An error occurred: {e}")
+                logging.error(f"An unexpected error occurred: {e}")
                 return None
 
     # address
@@ -268,3 +285,5 @@ class DecimalChainAPI:
     async def nft_token_id_transfers(self, address, token_id):
         endpoint = f"/nfts/token/{address}/{token_id}/transfers"
         return await self.get_data(endpoint)
+
+
