@@ -204,7 +204,7 @@ class DecimalChainAPI:
         return await self.get_data(endpoint)
 
     async def txs_by_hash(self, hash_tx):
-        endpoint = f"txs/txs-by-hash{hash_tx}"
+        endpoint = f"txs/{hash_tx}"
         return await self.get_data(endpoint)
 
     # rewards
