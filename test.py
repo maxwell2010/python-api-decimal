@@ -1,5 +1,5 @@
 import asyncio
-from decimal_api import DecimalChainAPI
+from api_decimal import DecimalChainAPI
 
 api = DecimalChainAPI(limit=10)
 
