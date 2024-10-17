@@ -13,7 +13,6 @@ class DecimalChainAPI:
 
     async def get_data(self, endpoint):
         url = f"{self.BASE_URL}/{endpoint}?limit={self.limit}&offset={self.offset}"
-        print(url)
         async with aiohttp.ClientSession() as session:
             try:
                 async with session.get(url) as response:
