@@ -13,6 +13,7 @@ class DecimalChainAPI:
 
     async def get_data(self, endpoint):
         url = f"{self.BASE_URL}/{endpoint}?limit={self.limit}&offset={self.offset}"
+        print(url)
         async with aiohttp.ClientSession() as session:
             try:
                 async with session.get(url) as response:
@@ -44,7 +45,7 @@ class DecimalChainAPI:
                         data = await response.json()
                         ok = data.get("ok", data.get("Ok", False))
                         result = data.get("result", data.get("Result", None))
-                        if ok and result is not None: 
+                        if ok and result is not None:
                             return result
                         else:
                             logging.error(f"Unexpected response structure: ok={ok}, result={result}")
@@ -155,135 +156,133 @@ class DecimalChainAPI:
 
     # block
     async def blocks(self):
-        endpoint = f"/blocks/blocks"
+        endpoint = f"blocks/blocks"
         return await self.get_data(endpoint)
 
     async def blocks_latest(self):
-        endpoint = f"/blocks/latest"
+        endpoint = f"blocks/latest"
         return await self.get_data(endpoint)
 
     async def blocks_live(self):
-        endpoint = f"/blocks/live"
+        endpoint = f"blocks/live"
         return await self.get_data(endpoint)
 
     async def blocks_height(self, height):
-        endpoint = f"/blocks/{height}"
+        endpoint = f"blocks/{height}"
         return await self.get_data(endpoint)
 
     async def blocks_evm(self):
-        endpoint = f"/blocks/blocks/evm-blocks"
+        endpoint = f"blocks/blocks/evm-blocks"
         return await self.get_data(endpoint)
 
     async def blocks_evm_height(self, height):
-        endpoint = f"/blocks/blocks/evm-blocks/{height}"
+        endpoint = f"blocks/blocks/evm-blocks/{height}"
         return await self.get_data(endpoint)
 
     # txs
     async def txs_check_tx(self):
-        endpoint = f"/txs/check-tx"
+        endpoint = f"txs/check-tx"
         return await self.get_data(endpoint)
 
     async def txs_drc20(self):
-        endpoint = f"/txs/drc20"
+        endpoint = f"txs/drc20"
         return await self.get_data(endpoint)
 
     async def txs_live(self):
-        endpoint = f"/txs/live"
+        endpoint = f"txs/live"
         return await self.get_data(endpoint)
 
     async def txs_txs(self):
-        endpoint = f"/txs/txs"
+        endpoint = f"txs/txs"
         return await self.get_data(endpoint)
 
     async def txs_by_address(self, address):
-        endpoint = f"/txs/txs-by-address{address}"
+        endpoint = f"txs/txs-by-address/{address}"
         return await self.get_data(endpoint)
 
     async def txs_by_block(self, height):
-        endpoint = f"/txs/txs-by-block{height}"
+        endpoint = f"txs/txs-by-block{height}"
         return await self.get_data(endpoint)
 
     async def txs_by_hash(self, hash_tx):
-        endpoint = f"/txs/txs-by-hash{hash_tx}"
+        endpoint = f"txs/txs-by-hash{hash_tx}"
         return await self.get_data(endpoint)
 
     # rewards
     async def rewards_live(self):
-        endpoint = f"/rewards/live"
+        endpoint = f"rewards/live"
         return await self.get_data(endpoint)
 
     async def rewards_by_validator(self, validator):
-        endpoint = f"/rewards/rewards-by-validator/{validator}"
+        endpoint = f"rewards/rewards-by-validator/{validator}"
         return await self.get_data(endpoint)
 
     async def rewards_by_validator_total(self, validator):
-        endpoint = f"/rewards/rewards-by-validator/{validator}/total"
+        endpoint = f"rewards/rewards-by-validator/{validator}/total"
         return await self.get_data(endpoint)
 
     async def rewards_address(self, address):
-        endpoint = f"/rewards/{address}"
+        endpoint = f"rewards/{address}"
         return await self.get_data(endpoint)
 
     async def rewards_address_total(self, address):
-        endpoint = f"/rewards/{address}/total"
+        endpoint = f"rewards/{address}/total"
         return await self.get_data(endpoint)
 
     # contracts
     async def contracts(self):
-        endpoint = f"/contracts/"
+        endpoint = f"contracts/"
         return await self.get_data(endpoint)
 
     async def contracts_live(self):
-        endpoint = f"/contracts/live"
+        endpoint = f"contracts/live"
         return await self.get_data(endpoint)
 
     async def contracts_compact(self, address):
-        endpoint = f"/contracts/compact/{address}"
+        endpoint = f"contracts/compact/{address}"
         return await self.get_data(endpoint)
 
     async def contracts_address(self, address):
-        endpoint = f"/contracts/{address}"
+        endpoint = f"contracts/{address}"
         return await self.get_data(endpoint)
 
     async def contracts_verification(self, address):
-        endpoint = f"/contracts/{address}/verification"
+        endpoint = f"contracts/{address}/verification"
         return await self.post_data(endpoint)
 
     # NFTs
     async def nft_live(self):
-        endpoint = f"/nfts/live"
+        endpoint = f"nfts/live"
         return await self.get_data(endpoint)
 
     async def nft_collections(self):
-        endpoint = f"/nfts/collections"
+        endpoint = f"nfts/collections"
         return await self.get_data(endpoint)
 
     async def nft_addresses_tokens(self, address):
-        endpoint = f"/nfts/addresses/{address}/tokens"
+        endpoint = f"nfts/addresses/{address}/tokens"
         return await self.post_data(endpoint)
 
     async def nft_addresses_transfers(self, address):
-        endpoint = f"/nfts/addresses/{address}/transfers"
+        endpoint = f"nfts/addresses/{address}/transfers"
         return await self.post_data(endpoint)
 
     async def nft_collections_address(self, address):
-        endpoint = f"/nfts/collections/{address}"
+        endpoint = f"nfts/collections/{address}"
         return await self.get_data(endpoint)
 
     async def nft_collections_tokens(self, address):
-        endpoint = f"/nfts/collections/{address}/tokens"
+        endpoint = f"nfts/collections/{address}/tokens"
         return await self.get_data(endpoint)
 
     async def nft_collections_transfers(self, address):
-        endpoint = f"/nfts/collections/{address}/transfers"
+        endpoint = f"nfts/collections/{address}/transfers"
         return await self.get_data(endpoint)
 
     async def nft_token_id(self, address, token_id):
-        endpoint = f"/nfts/token/{address}/{token_id}"
+        endpoint = f"nfts/token/{address}/{token_id}"
         return await self.get_data(endpoint)
 
     async def nft_token_id_transfers(self, address, token_id):
-        endpoint = f"/nfts/token/{address}/{token_id}/transfers"
+        endpoint = f"nfts/token/{address}/{token_id}/transfers"
         return await self.get_data(endpoint)
-
-
