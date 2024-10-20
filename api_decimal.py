@@ -108,6 +108,10 @@ class DecimalChainAPI:
         endpoint = f"addresses/{address_id}"
         return await self.get_data(endpoint)
 
+    async def address_convert(self, address_id):
+        endpoint = f"addresses/{address_id}/convert"
+        return await self.get_data(endpoint)
+
     # validator
     async def validator_live(self):
         endpoint = f"validators/live"
