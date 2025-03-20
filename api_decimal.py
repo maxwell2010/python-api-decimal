@@ -114,27 +114,27 @@ class DecimalChainAPI:
     
     # coins
     async def get_coins(self):
-        endpoint = "coin/coins"
+        endpoint = "coins/coins"
         return await self.get_data(endpoint)
 
     async def get_del_price(self):
-        endpoint = "coin/delprice"
+        endpoint = "coins/delprice"
         return await self.get_data(endpoint)
 
     async def get_live(self):
-        endpoint = "coin/live"
+        endpoint = "coins/live"
         return await self.get_data(endpoint)
 
     async def get_native(self):
-        endpoint = "coin/native"
+        endpoint = "coins/native"
         return await self.get_data(endpoint)
 
     async def get_ratings(self):
-        endpoint = "coin/ratings"
+        endpoint = "coins/ratings"
         return await self.get_data(endpoint)
 
     async def get_coin_by_symbol(self, symbol: str):
-        endpoint = f"coin/{symbol}"
+        endpoint = f"coins/{symbol}"
         return await self.get_data(endpoint)
         
     # validator
