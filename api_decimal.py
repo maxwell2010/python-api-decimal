@@ -111,7 +111,32 @@ class DecimalChainAPI:
     async def address_convert(self, address):
         endpoint = f"addresses/{address}/convert"
         return await self.get_data(endpoint)
+    
+    # coins
+    async def get_coins(self):
+        endpoint = "coin/coins"
+        return await self.get_data(endpoint)
 
+    async def get_del_price(self):
+        endpoint = "coin/delprice"
+        return await self.get_data(endpoint)
+
+    async def get_live(self):
+        endpoint = "coin/live"
+        return await self.get_data(endpoint)
+
+    async def get_native(self):
+        endpoint = "coin/native"
+        return await self.get_data(endpoint)
+
+    async def get_ratings(self):
+        endpoint = "coin/ratings"
+        return await self.get_data(endpoint)
+
+    async def get_coin_by_symbol(self, symbol: str):
+        endpoint = f"coin/{symbol}"
+        return await self.get_data(endpoint)
+        
     # validator
     async def validator_live(self):
         endpoint = f"validators/live"
